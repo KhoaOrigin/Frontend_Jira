@@ -105,9 +105,18 @@ const CreateProjectForm = () => {
                                </FormItem>)}
                     />
                     <DialogClose>
+                        {false ? (
+                            <div>
+                                <p>
+                                    you can create only 3 project with free plan, please upgrade
+                                    your plan
+                                </p>
+                            </div>
+                            ) : (
                         <Button type="submit" className="w-fully mt-5">
                             Create Project
                         </Button>
+                            )}
                     </DialogClose>
                 </form>
             </Form>

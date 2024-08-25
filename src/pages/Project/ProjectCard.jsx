@@ -8,16 +8,18 @@ import {
 } from "@/components/ui/dropdown-menu.jsx";
 import {Button} from "@/components/ui/button.jsx";
 import {Badge} from "@/components/ui/badge.jsx";
+import {useNavigate} from "react-router-dom";
 
 
-function ProjectCard() {
+const ProjectCard = () => {
+    const navigate = useNavigate();
     return (
         <Card className="p-5 w-full lg:max-w-3x1">
             <div className="space-y-5">
                 <div className="space-y-2">
                     <div className="flex justify-between">
                         <div className="flex items-center gap-5">
-                            <h1 className="cursor-pointer font-bold text-lg">
+                            <h1 onClick={() => navigate("/project/3")} className="cursor-pointer font-bold text-lg">
                                 Create Ecommerce Website
                             </h1>
                             <DotFilledIcon/>

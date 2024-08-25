@@ -117,10 +117,10 @@ const ProjectList = () => {
           <div>
             <div className="space-y-5 min-h-[74vh]">
               {keyword
-                ? [1, 2, 3].map((item) =>
+                ? [1, 1, 1].map((item) =>
                     <ProjectCard key={item}></ProjectCard>
                   )
-                : [1, 2, 3, 4].map((item) => (
+                : [1, 1, 1, 1].map((item) => (
                     <ProjectCard key={item}></ProjectCard>
                   ))}
             </div>
