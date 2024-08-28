@@ -1,5 +1,5 @@
 import {
-    ACCEPT_INVITATION_REQUEST,
+    ACCEPT_INVITATION_REQUEST, ACCEPT_INVITATION_SUCCESS,
     CREATE_PROJECT_REQUEST, CREATE_PROJECT_SUCCESS,
     DELETE_PROJECT_REQUEST, DELETE_PROJECT_SUCCESS,
     FETCH_PROJECT_BY_ID_REQUEST, FETCH_PROJECT_BY_ID_SUCCESS,
@@ -44,7 +44,10 @@ export const projectReducer = (state = initialState, action) => {
             return {...state, projectDetails: action.project, loading: false, error: null}
 
         case DELETE_PROJECT_SUCCESS:
-            return {...state, projects: state.projects.filter(project => project.id === action.projectId), loading: false, error: null}
+            return {...state, projects: state.projects.filter(project => project.id !== action.projectId), loading: false, error: null}
+
+        case ACCEPT_INVITATION_SUCCESS:
+            return {...state, projects: [...state.projects, action.project], loading: false, error: null}
         default:
             return state;
     }

@@ -7,31 +7,31 @@ export const sendMessage = (messageData) => async (dispatch) => {
     try {
         const {data} = await api.post("/api/message/send", messageData)
         console.log("send message", data)
-        dispatch({type: actionType.SEND_MESSAGE_SUCCESS, message: data})
+        dispatch({type: actionType.SEND_MESSAGE_SUCCESS, message: data.data})
     } catch(error) {
         console.log("error", error)
         dispatch({type: actionType.SEND_MESSAGE_FAILURE, error: error.message})
     }
 }
 
-export const getChatByProject = ({projectId}) => async (dispatch) => {
+export const getChatByProject = (projectId) => async (dispatch) => {
     dispatch({type: actionType.FETCH_CHAT_BY_PROJECT_REQUEST})
     try {
         const {data} = await api.get(`/api/project/${projectId}/chat`)
         console.log("get chat by project", data)
-        dispatch({type: actionType.FETCH_CHAT_BY_PROJECT_SUCCESS, chat: data})
+        dispatch({type: actionType.FETCH_CHAT_BY_PROJECT_SUCCESS, chat: data.data})
     } catch(error) {
         console.log("error", error)
         dispatch({type: actionType.FETCH_CHAT_BY_PROJECT_FAILURE, error: error.message})
     }
 }
 
-export const getChatMessage = ({chatId}) => async (dispatch) => {
+export const getChatMessage = (chatId) => async (dispatch) => {
     dispatch({type: actionType.FETCH_CHAT_MESSAGES_REQUEST})
     try {
         const {data} = await api.get(`/api/message/chat/${chatId}`)
         console.log("get chat message", data)
-        dispatch({type: actionType.FETCH_CHAT_MESSAGES_SUCCESS, chatId, chat: data})
+        dispatch({type: actionType.FETCH_CHAT_MESSAGES_SUCCESS, chat: data.data})
     } catch(error) {
         console.log("error", error)
         dispatch({type: actionType.FETCH_CHAT_MESSAGES_FAILURE, error: error.message})

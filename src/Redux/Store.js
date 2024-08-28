@@ -1,7 +1,7 @@
 import {applyMiddleware, combineReducers, legacy_createStore} from "redux";
 import {thunk} from "redux-thunk";
 import {authReducer} from "@/Redux/Auth/Reducer.js";
-import {projectReducer} from "@/Redux/demoReducer.js";
+import {projectReducer} from "@/Redux/Project/Reducer.js";
 import {chatReducer} from "@/Redux/Chat/Reducer.js";
 import {commentReducer} from "@/Redux/Comment/Reducer.js";
 import {issueReducer} from "@/Redux/Issue/Reducer.js";
@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
     auth: authReducer,
     project: projectReducer,
     chat: chatReducer,
-    store: commentReducer,
+    comment: commentReducer,
     issue: issueReducer,
     subscription: subscriptionReducer,
 

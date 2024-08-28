@@ -16,10 +16,13 @@ export const chatReducer = (state = initialState, action) => {
             return {...state, loading: true, error: null}
 
         case actionType.SEND_MESSAGE_SUCCESS:
-            return {...state, messages: [...state.message, action.message], loading: false, error: null}
+            return {...state, messages: [...state.messages, action.message], loading: false, error: null}
+
+
+        case actionType.FETCH_CHAT_MESSAGES_SUCCESS:
+            return {...state, chat: action.chat, loading: false, error: null}
 
         case actionType.FETCH_CHAT_BY_PROJECT_SUCCESS:
-        case actionType.FETCH_CHAT_MESSAGES_SUCCESS:
             return {...state, chat: action.chat, loading: false, error: null}
 
         case actionType.FETCH_MESSAGES_SUCCESS:
