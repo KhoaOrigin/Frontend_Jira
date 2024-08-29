@@ -9,7 +9,7 @@ import {useParams} from "react-router-dom";
 
 const InviteUserForm = () => {
     const dispatch = useDispatch();
-    const {id} = useParams();
+    const {projectId} = useParams();
     const form = useForm({
         defaultValues: {
             email: ""
@@ -17,7 +17,9 @@ const InviteUserForm = () => {
     });
 
     const onSubmit = (data) => {
-        dispatch(inviteToProject({ email: data.email, projectId : id}))
+        console.log("Submitting data:", data); // Log the data
+        // const projectId = 26;
+        dispatch(inviteToProject({ email: data.email,projectId: projectId}))
         console.log("create project", data);
     }
     return (

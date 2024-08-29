@@ -26,17 +26,27 @@ const ChatBox = () => {
     const handleMessageChange = (e) => {
         setMessage(e.target.value);
     }
-    useEffect(() => {
-        dispatch(getChatByProject(projectId))
-    }, [projectId]) // Sử dụng projectId làm dependency để tránh re-render không cần thiết.
+    // useEffect(() => {
+    //     dispatch(getChatByProject(projectId))
+    // }, [projectId]) // Sử dụng projectId làm dependency để tránh re-render không cần thiết.
+
+    // useEffect(() => {
+    //     if (chat?.id) {
+    //         dispatch(getChatMessage(chat.id)) // Chỉ dispatch getChatMessage khi chat đã được load
+    //     }
+    // }, [chat?.id]) // Sử dụng chat.id làm dependency để gọi API lấy messages khi chat được load.
+
 
     useEffect(() => {
+        dispatch(getChatByProject(projectId));
+    }, [projectId, dispatch]);
+ 
+    useEffect(() => {
+        console.log("Chat state:", chat); // Log the chat state
         if (chat?.id) {
-            dispatch(getChatMessage(chat.id)) // Chỉ dispatch getChatMessage khi chat đã được load
+            dispatch(getChatMessage(chat.id));
         }
-    }, [chat?.id]) // Sử dụng chat.id làm dependency để gọi API lấy messages khi chat được load.
-
-
+    }, [chat, dispatch]);
     return (
         <div className="sticky">
             <div className="border rounded-lg">
@@ -58,7 +68,7 @@ const ChatBox = () => {
                                     <p className="text-gray-300">{item.content}</p>
                                 </div>
                                 <Avatar>
-                                    <AvatarFallback>K</AvatarFallback>
+                                    <AvatarFallback>{item.sender.fullName[0]}</AvatarFallback>
                                 </Avatar>
                             </div>)}
                 </ScrollArea>

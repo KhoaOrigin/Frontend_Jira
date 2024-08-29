@@ -81,17 +81,47 @@ export const inviteToProject = ({email, projectId}) => async (dispatch) => {
     }
 }
 
-export const acceptInvitation = ({token, navigate}) => async (dispatch) => {
+// export const acceptInvitation = ({token, navigate}) => async (dispatch) => {
+//     dispatch({type: ACCEPT_INVITATION_REQUEST});
+//     try {
+//         const {data} = await api.get("/api/project/accept_invitation", {params: {token}});
+//         navigate("/project/"+data.data.projectId);
+//         console.log("accept invitation", data.data);
+//         dispatch({type: ACCEPT_INVITATION_SUCCESS, project: data.data});
+//     } catch (error) {
+//         console.log("error", error)
+//     }
+// }      
+
+// ... existing code ...
+
+export const acceptInvitation = ({token, navigate}) => async (dispatch, getState) => {
     dispatch({type: ACCEPT_INVITATION_REQUEST});
     try {
-        const {data} = await api.get("/api/project/accept_invitation", {params: {token}});
-        navigate("/project/"+data.data.projectId);
+        const jwt = localStorage.getItem('jwt'); // Retrieve JWT from local storage
+        if (!jwt) {
+            console.error('JWT not found in local storage');
+            return; // Handle the error appropriately
+        }
+
+        const {data} = await api.post("/api/project/accept_invitation", null, {
+            params: {
+                token: token // Send token as a query parameter
+            },
+            headers: { Authorization: `Bearer ${jwt}` } // Add JWT to request headers
+        });
+
+        navigate("/project/"+data.projectId);
         console.log("accept invitation", data.data);
         dispatch({type: ACCEPT_INVITATION_SUCCESS, project: data.data});
     } catch (error) {
-        console.log("error", error)
+        console.log("error", error);
+        if (error.response) {
+            console.log("Response data:", error.response.data); // Log response data for more details
+        }
     }
 }
+
 
 
 // export const acceptInvitation = ({ token, navigate }) => async (dispatch, getState) => {

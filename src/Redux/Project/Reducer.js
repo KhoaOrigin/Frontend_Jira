@@ -7,7 +7,8 @@ import {
     FETCH_PROJECTS_SUCCESS,
     INVITE_TO_PROJECT_REQUEST,
     SEARCH_PROJECT_REQUEST,
-    SEARCH_PROJECT_SUCCESS
+    SEARCH_PROJECT_SUCCESS,
+    INVITE_TO_PROJECT_SUCCESS,
 } from "@/Redux/Project/ActionType.js";
 
 
@@ -48,6 +49,10 @@ export const projectReducer = (state = initialState, action) => {
 
         case ACCEPT_INVITATION_SUCCESS:
             return {...state, projects: [...state.projects, action.project], loading: false, error: null}
+
+        case INVITE_TO_PROJECT_SUCCESS:
+            return {...state, projects: [...state.projects, action.data.project], loading: false, error: null}
+
         default:
             return state;
     }

@@ -20,7 +20,7 @@ export const chatReducer = (state = initialState, action) => {
 
 
         case actionType.FETCH_CHAT_MESSAGES_SUCCESS:
-            return {...state, chat: action.chat, loading: false, error: null}
+            return {...state, messages: action.chat, loading: false, error: null}
 
         case actionType.FETCH_CHAT_BY_PROJECT_SUCCESS:
             return {...state, chat: action.chat, loading: false, error: null}
